@@ -21,7 +21,7 @@ Convert Japanese text into physical key sequences for retro Japanese computers.
 
 `ｼｰｸﾛﾝ`、`しーくろん` でも同じ結果です。`スターアーサー`、`ｽﾀｰｱｰｻｰ`、`すたーあーさー` も同じキー列になります。空欄や対応できない文字は画面内で日本語の案内を表示します。
 
-配布ファイルは `retrokey-windows-x64.zip` と `retrokey-macos-arm64.zip`（Apple Silicon 用）です。アーキテクチャは実際のビルド環境から決定します。Intel Mac 用ビルドは現在の Actions 構成に含めていません。
+配布ファイルは `retrokey-windows-x64.zip`、`retrokey-macos-arm64.zip`（Apple Silicon 用）、`retrokey-macos-x64.zip`（Intel Mac 用）です。アーキテクチャは実際のビルド環境から決定します。Intel Mac 版は macOS 15 の runner でビルド・起動検証します。古い macOS での互換性は未検証です。
 
 Windows Defender / SmartScreen、macOS の Gatekeeper が警告する場合があります。現在は Windows コード署名、Apple Developer ID 署名・notarization に未対応です。管理者権限は要求しません。
 
@@ -172,7 +172,7 @@ Windows では `--onefile --windowed` の exe、macOS では `--onedir --windowe
 
 ### GitHub Actions
 
-`.github/workflows/desktop.yml` は `windows-latest` と `macos-latest` を使用します。
+`.github/workflows/desktop.yml` は `windows-latest`、`macos-latest`（Apple Silicon）、`macos-15-intel`（Intel Mac）を使用します。
 
 - 通常 push / PR：CLI・GUI の単体テストと、ネイティブ GUI の変換・クリップボード確認。
 - main push / `v*` タグ / release / 手動実行：各 OS で配布ビルドと GUI 起動検証、ZIP の artifact 保存。
