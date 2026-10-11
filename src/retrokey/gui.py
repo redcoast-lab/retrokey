@@ -48,7 +48,7 @@ class RetrokeyApp:
         ttk.Label(frame, text="¥ は上段、\\ は右 Shift の左のキーです。\nゲーム側のカナ入力を有効にして使います。", wraplength=470).grid(row=7, column=0, sticky="w", pady=(10, 0))
         self.result = ""
         root.report_callback_exception = self.on_unexpected_error
-        root.after_idle(self.entry.focus_set)
+        root.after_idle(self.entry.focus_force)
 
     def set_result(self, text: str) -> None:
         self.result = text
@@ -93,7 +93,7 @@ def smoke_test(root: tk.Tk, app: RetrokeyApp, report: Path) -> None:
     """Build verification: exercise real widgets and clipboard, then close."""
     try:
         root.update()
-        assert root.focus_get() == app.entry
+        assert root.focus_get() == app.entry, "Input field did not receive initial focus"
         for variants, expected in (
             (("シークロン", "ｼｰｸﾛﾝ", "しーくろん"), "D → ¥ → H → \\ → Y"),
             (("スターアーサー", "ｽﾀｰｱｰｻｰ", "すたーあーさー"), "R → Q → ¥ → 3 → ¥ → X → ¥"),
@@ -101,11 +101,11 @@ def smoke_test(root: tk.Tk, app: RetrokeyApp, report: Path) -> None:
             for text in variants:
                 app.input.set(text)
                 app.on_convert()
-                assert app.result == expected
-                assert app.input.get() == text
-                assert app.output.get("1.0", "end-1c") == expected
+                assert app.result == expected, f"Conversion mismatch for {text}"
+                assert app.input.get() == text, "Input was changed"
+                assert app.output.get("1.0", "end-1c") == expected, "Result widget mismatch"
                 app.on_copy()
-                assert root.clipboard_get() == expected
+                assert root.clipboard_get() == expected, "Clipboard text mismatch"
         app.input.set("漢字")
         app.on_convert()
         assert not app.result and "変換できません" in app.status.get()
