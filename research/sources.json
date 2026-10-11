@@ -1,0 +1,9 @@
+{
+  "fm7.cpp": "https://raw.githubusercontent.com/mamedev/mame/f9b2a9da4e937468fdd9099e8316e6ad40659f86/src/mame/fujitsu/fm7.cpp",
+  "x1.cpp": "https://raw.githubusercontent.com/mamedev/mame/f9b2a9da4e937468fdd9099e8316e6ad40659f86/src/mame/sharp/x1.cpp",
+  "pc88_kbd.cpp": "https://raw.githubusercontent.com/mamedev/mame/f9b2a9da4e937468fdd9099e8316e6ad40659f86/src/mame/nec/pc88_kbd.cpp",
+  "pc98_kbd.cpp": "https://raw.githubusercontent.com/mamedev/mame/f9b2a9da4e937468fdd9099e8316e6ad40659f86/src/mame/nec/pc98_kbd.cpp",
+  "keytable.res": "https://raw.githubusercontent.com/AZO234/NP2kai/253ef651c9d5d8f6d11f9cc7326b4f05ce5c9ce4/bios/keytable.res",
+  "quasi88-keyboard.c": "https://raw.githubusercontent.com/libretro/quasi88-libretro/7884be5277776a5d8c4fdc4e574e9b5b589945c9/src/keyboard.c",
+  "quasi88-romaji-table.h": "https://raw.githubusercontent.com/libretro/quasi88-libretro/7884be5277776a5d8c4fdc4e574e9b5b589945c9/src/romaji-table.h"
+}
