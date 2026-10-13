@@ -22,7 +22,7 @@ Convert Japanese text into physical key sequences for retro Japanese computers.
 
 ```text
 入力: シークロン
-押すキー: D → ¥ → H → \ → Y
+押すキー: D → ¥ → H → ＼ → Y
 ```
 
 `ｼｰｸﾛﾝ`、`しーくろん` でも同じ結果です。`スターアーサー`、`ｽﾀｰｱｰｻｰ`、`すたーあーさー` も同じキー列になります。空欄や対応できない文字は画面内で日本語の案内を表示します。

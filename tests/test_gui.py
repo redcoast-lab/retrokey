@@ -8,7 +8,7 @@ from retrokey.gui import error_message, format_keys
 class GuiLogicTests(unittest.TestCase):
     def test_shared_core_and_clipboard_text(self):
         with patch("retrokey.gui.convert", return_value={"keys": ["D", "¥", "H", "\\", "Y"]}) as core:
-            self.assertEqual(format_keys("しーくろん"), "D → ¥ → H → \\ → Y")
+            self.assertEqual(format_keys("しーくろん"), "D → ¥ → H → ＼ → Y")
             core.assert_called_once_with("しーくろん")
 
     def test_input_variants(self):
@@ -20,7 +20,7 @@ class GuiLogicTests(unittest.TestCase):
             for text in variants:
                 with self.subTest(text=text):
                     self.assertEqual(convert(text)["keys"], expected)
-                    self.assertEqual(format_keys(text), " → ".join(expected))
+                    self.assertEqual(format_keys(text), " → ".join(expected).replace("\\", "＼"))
 
     def test_readable_error(self):
         with self.assertRaises(UnsupportedCharacter) as caught:

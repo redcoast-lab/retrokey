@@ -11,9 +11,13 @@ from . import UnsupportedCharacter, convert
 from .history import HistoryStore
 
 
+# Japanese fonts draw U+005C as a yen sign, which makes the ロ key look like the ー key.
+DISPLAY_KEYS = {"\\": "＼"}
+
+
 def format_keys(text: str) -> str:
     """The same string is displayed, selected, and copied."""
-    return " → ".join(convert(text)["keys"])
+    return " → ".join(DISPLAY_KEYS.get(key, key) for key in convert(text)["keys"])
 
 
 def error_message(error: UnsupportedCharacter) -> str:
@@ -52,7 +56,7 @@ class RetrokeyApp:
         self.copy_button.pack(side="left")
         self.status = tk.StringVar(root)
         ttk.Label(frame, textvariable=self.status, wraplength=470).grid(row=6, column=0, sticky="w")
-        ttk.Label(frame, text="¥ は上段、\\ は右 Shift の左のキーです。\nゲーム側のカナ入力を有効にして使います。", wraplength=470).grid(row=7, column=0, sticky="w", pady=(10, 0))
+        ttk.Label(frame, text="¥ は上段、＼ は右 Shift の左のキーです。\nゲーム側のカナ入力を有効にして使います。", wraplength=470).grid(row=7, column=0, sticky="w", pady=(10, 0))
         panels = ttk.Frame(frame)
         panels.grid(row=8, column=0, sticky="nsew", pady=(14, 0))
         panels.columnconfigure(0, weight=1, uniform="lists")
@@ -185,7 +189,7 @@ def smoke_test(root: tk.Tk, app: RetrokeyApp, report: Path) -> None:
         root.update()
         assert root.focus_get() == app.entry, "Input field did not receive initial focus"
         for variants, expected in (
-            (("シークロン", "ｼｰｸﾛﾝ", "しーくろん"), "D → ¥ → H → \\ → Y"),
+            (("シークロン", "ｼｰｸﾛﾝ", "しーくろん"), "D → ¥ → H → ＼ → Y"),
             (("スターアーサー", "ｽﾀｰｱｰｻｰ", "すたーあーさー"), "R → Q → ¥ → 3 → ¥ → X → ¥"),
         ):
             for text in variants:
